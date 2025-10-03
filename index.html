@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arduino Components Levels | EN</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle, #0f0c29, #302b63, #24243e);
+      padding-bottom: 100px;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .logo {
+      width: 70px;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+      transition: 0.3s;
+      max-width: 15vw;
+      height: auto;
+      z-index: 999;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #ff00f7;
+      border-radius: 25%;
+    }
+
+    .logo1 {
+      width: 70px;
+      position: fixed;
+      top: 20px;
+      left: 100px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+      transition: 0.3s;
+      max-width: 15vw;
+      height: auto;
+      z-index: 999;
+    }
+
+    .logo1:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #ff00f7;
+      border-radius: 25%;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 100px;
+      font-size: 3.2rem;
+      background: linear-gradient(90deg, #00ffe1, #ff00c8, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      padding: 0 10px;
+    }
+
+    .levels-container {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .level {
+      border-radius: 20px;
+      padding: 50px 30px;
+      margin-bottom: 60px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .level.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .level-one {
+      background: linear-gradient(135deg, #1e3c72, #0b3177);
+    }
+
+    .level-two {
+      background: linear-gradient(135deg, #4f2a98, #e90a4d);
+    }
+
+    .level-three {
+      background: linear-gradient(135deg, #ff4e50, #f9d423);
+    }
+
+    .level-four {
+      background: linear-gradient(135deg, #b21ce0, #000851);
+    }
+
+    .level-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .level-icon {
+      font-size: 3rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 50%;
+      border: #fff 3px solid;
+      box-shadow: inset 0 0 20px rgb(187, 184, 184), 0 0 20px rgb(187, 184, 184);
+    }
+
+    .level-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    }
+
+    .image-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .component-link {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 15px;
+      width: 220px;
+      max-width: 90vw;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .component-link:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 35px rgba(0, 255, 255, 0.3);
+    }
+
+    .component-img {
+      width: 100%;
+      height: auto;
+      max-height: 150px;
+      object-fit: cover;
+      border-radius: 15px;
+      border: 2px solid #fff;
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+      transition: 0.4s ease;
+    }
+
+    .component-name {
+      margin-top: 12px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      user-select: none;
+    }
+
+    .component-link:hover .component-name {
+      opacity: 1;
+    }
+
+    .separator {
+      height: 8px;
+      width: 80%;
+      margin: 50px auto;
+      border-radius: 5px;
+      background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00);
+    }
+
+    p {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    .lang-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 18px;
+      background: #fff;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #9909a7;
+      text-decoration: none;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+      transition: all 0.3s;
+      z-index: 999;
+    }
+
+    .lang-btn:hover {
+      border-radius: 25%;
+      transform: scale(1.08);
+      box-shadow: 0 0 15px #ff00f7;
+    }
+
+    #ff {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 90%;
+      font-size: 1.6rem;
+      text-align: center;
+    }
+
+    .update {
+      background: linear-gradient(45deg, #ff3b3b, #ff7f00, #ffff00, #00ff00, #00bfff, #8a2be2);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: bold;
+    }
+
+    .upgrade {
+      font-weight: bold;
+    }
+
+    .new-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: linear-gradient(45deg, #ff3b3b, #ff7f00, #ffff00, #00ff00, #00bfff, #8a2be2);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transform: rotate(45deg);
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+    }
+
+    /* زرار Back To Up */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #90caf9;
+      color: #000;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      display: none;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+    }
+
+    #backToTop:hover {
+      background: #64b5f6;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+  <a href="https://www.facebook.com/calleragial"><img src="agail.jpg" class="logo" alt="Logo"></a>
+  <a href="tayem4.html">
+    <img class="logo1" src="ChatGPT Image Sep 28, 2025, 04_03_53 PM (1).png" alt="">
+  </a>
+
+  <a href="index - AR.html" class="lang-btn">AR</a>
+  <h1>Arduino Components | In English</h1>
+  <p class="upgrade"> 🚀 Explore new updates with more modules and exciting projects </p>
+
+  <div class="levels-container">
+    <section class="level level-one">
+      <div class="level-header">
+        <div class="level-icon">🌐</div>
+        <h2 class="level-title">Rank 1: Beginner</h2>
+      </div>
+      <div class="image-container">
+        <a href="ARDUINO UNO.html" class="component-link">
+          <img src="arduino.jpg" alt="Arduino UNO" class="component-img">
+          <div class="component-name">Arduino UNO</div>
+        </a>
+        <a href="breadboard.html" class="component-link">
+          <img src="bread-png.jpg" alt="Breadboard" class="component-img">
+          <div class="component-name">Breadboard</div>
+        </a>
+        <a href="LED.html" class="component-link">
+          <img src="led-png.jpg" alt="LED" class="component-img">
+          <div class="component-name">LED</div>
+        </a>
+        <a href="buzzer.html" class="component-link">
+          <img src="buzzer-png.jpg" alt="Buzzer" class="component-img">
+          <div class="component-name">Buzzer</div>
+        </a>
+        <a href="pushbutton.html" class="component-link">
+          <img src="BUSSH.jpg" alt="Push Button" class="component-img">
+          <div class="component-name">Push Button</div>
+        </a>
+        <a href="RGB led.html" class="component-link">
+          <img src="RGB1.jpg" alt="RGB LED" class="component-img">
+          <div class="component-name">RGB LED</div>
+        </a>
+        <a href="poton1.html" class="component-link">
+          <div class="new-badge">NEW!!</div>
+          <img src="poton-png.jpg" alt="Potentiometer" class="component-img">
+          <div class="component-name">Potentiometer</div>
+        </a>
+      </div>
+    </section>
+
+    <div class="separator"></div>
+
+    <section class="level level-two">
+      <div class="level-header">
+        <div class="level-icon">🧠</div>
+        <h2 class="level-title">Rank 2: Intermediate</h2>
+      </div>
+      <div class="image-container">
+        <a href="servo.html" class="component-link">
+          <img src="servo1.jpg" alt="Servo Motor" class="component-img">
+          <div class="component-name">Servo Motor</div>
+        </a>
+        <a href="LCD.html" class="component-link">
+          <img src="LCD.jpg" alt="LCD" class="component-img">
+          <div class="component-name">LCD Display</div>
+        </a>
+        <a href="ultra1.html" class="component-link">
+          <div class="new-badge">NEW!!</div>
+          <img src="ultra1.jpg" alt="Ultrasonic" class="component-img">
+          <div class="component-name">Ultrasonic</div>
+        </a>
+        <a href="relay1.html" class="component-link">
+          <div class="new-badge">NEW!!</div>
+          <img src="relay1.jpg" alt="Relay" class="component-img">
+          <div class="component-name">Relay</div>
+        </a>
+        <a href="bluetooth1.html" class="component-link">
+          <div class="new-badge">NEW!!</div>
+          <img src="bluetooth1.jpg" alt="Bluetooth" class="component-img">
+          <div class="component-name">Bluetooth</div>
+        </a>
+        <a href="DC1.html" class="component-link">
+          <div class="new-badge">NEW!!</div>
+          <img src="dc.jpg" alt="DC Motor" class="component-img">
+          <div class="component-name">DC Motor</div>
+        </a>
+        <a href="7.html" class="component-link">
+          <div class="new-badge">NEW!!</div>
+          <img src="7.jpg" alt="7 Segment" class="component-img">
+          <div class="component-name">7 Segment</div>
+        </a>
+      </div>
+    </section>
+
+    <div class="separator"></div>
+
+    <section class="level level-three">
+      <div class="level-header">
+        <div class="level-icon">🚀</div>
+        <h2 class="level-title">Rank 3: Advanced</h2>
+      </div>
+      <div class="image-container">
+        <p>coming soon !</p>
+      </div>
+    </section>
+
+    <div class="separator"></div>
+
+    <section class="level level-four">
+      <div class="level-header">
+        <div class="level-icon">🎓</div>
+        <h2 class="level-title">Rank 4: Projects</h2>
+      </div>
+      <div class="image-container">
+        <a href="robot1.html" class="component-link">
+          <div class="new-badge">NEW!!</div>
+          <img src="robot car.jfif" class="component-img">
+          <div class="component-name">Bluetooth Robot Car</div>
+        </a>
+      </div>
+    </section>
+
+    <p id="ff">Hi, I'm Tayem. I build engaging online projects to help you explore and learn Arduino with easly</p>
+    <p id="ff">Fresh updates every week — stay tuned for something new</p>
+    <p id="ff"><u class="update">update</u> : Added a new section for Components with explanation and examples like
+      Bluetooth Robot Car</p>
+  </div>
+
+  <!-- زرار Back to Up -->
+  <button id="backToTop">⬆ Back to Up</button>
+
+  <script>
+    const levels = document.querySelectorAll('.level');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.2 });
+    levels.forEach(level => { observer.observe(level); });
+
+    // Back To Up button
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 200) {
+        backToTop.style.display = "block";
+      } else {
+        backToTop.style.display = "none";
+      }
+    });
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>

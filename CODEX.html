@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arduino Components Levels | EN</title>
+  <style>
+    * {
+      text-shadow: 0 0 5px #ddd;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle, #0f0c29, #302b63, #24243e);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #fff;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      margin-top: 100px;
+      text-shadow: 0 0 15px #00eaff, 0 0 25px #00eaff;
+      transition: 0.3s;
+    }
+
+    h1:hover {
+      color: #00eaff;
+      text-shadow: 0 0 20px #00eaff, 0 0 30px #00eaff;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 15px auto;
+      width: 80%;
+      line-height: 1.6;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .logo {
+      width: 70px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+      transition: 0.3s;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #ff00f7;
+    }
+
+    .language-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #00eaff, #2a5298);
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0, 234, 255, 0.6);
+      transition: 0.3s;
+    }
+
+    .language-toggle:hover {
+      background: linear-gradient(135deg, #ff00f7, #302b63);
+      box-shadow: 0 0 15px rgba(255, 0, 247, 0.7);
+      transform: scale(1.05);
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 60px;
+    }
+
+    .card {
+      width: 250px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+      transition: 0.3s;
+      text-align: center;
+      border: 1px solid white;
+
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 15px rgba(0, 234, 255, 0.4);
+      border: 1px solid #00eaff;
+    }
+
+    .card::before {
+      
+
+
+
+
+    }
+
+    .card img {
+      width: 100px;
+      margin-bottom: 15px;
+      transition: 0.3s;
+    }
+
+    .card img:hover {
+      transform: scale(1.1);
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 12px #00eaff;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      color: #00eaff;
+      text-shadow: 0 0 18px #00eaff;
+    }
+
+    .card p {
+
+      color: #ddd;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .card {
+        width: 200px;
+      }
+
+      .card img {
+        width: 80px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="https://www.facebook.com/JupiterAcademyForKids/"> <img src="jupiter.webp" alt="Logo" class="logo"></a>
+
+  <button class="language-toggle">AR</button>
+
+  <h1>Arduino Components Levels</h1>
+  <p>Explore the different components used in Arduino projects and learn their levels step by step.</p>
+
+  <div class="container">
+    <div class="card">
+      <img src="component1.png" alt="Beginner Explorer">
+      <h2>RANK 1</h2>
+      <p>A beginner-friendly stage designed to introduce you to the basics</p>
+    </div>
+
+    <div class="card">
+      <img src="component2.png" alt="Skilled Challenger">
+      <h2>RANK 2</h2>
+      <p>A balanced challenge that tests your growing skills and focus</p>
+    </div>
+
+    <div class="card">
+      <img src="component3.png" alt="Master of Legends">
+      <h2>RANK 3</h2>
+      <p>The ultimate test of mastery, requiring high experience and determination</p>
+    </div>
+  </div>
+</body>
+
+</html>
