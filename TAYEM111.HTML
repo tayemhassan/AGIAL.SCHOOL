@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #1a2a3a, #2e4053, #1b2838);
+      color: #f1f1f1;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    header {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+    }
+
+    .back-btn {
+      background: rgba(255,255,255,0.08);
+      color: #f1f1f1;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.15);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.15);
+      transform: scale(1.05);
+    }
+
+    h1 {
+      font-size: 3rem;
+      text-align: center;
+      margin: 0;
+      color: #fff;
+      text-shadow: 0 0 8px rgba(144, 202, 249, 0.6);
+      animation: fadeIn 2s ease-in-out;
+      transition: all 0.3s ease;
+    }
+    h1:hover {
+      text-shadow: 0 0 15px rgba(144, 202, 249, 0.9);
+      transform: scale(1.05);
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: #90caf9;
+      margin-top: 12px;
+      animation: slideUp 2.5s ease-in-out;
+      transition: all 0.3s ease;
+    }
+    h2:hover {
+      color: #bbdefb;
+      transform: scale(1.05);
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      max-width: 650px;
+      text-align: center;
+      margin-top: 25px;
+      animation: fadeIn 3s ease-in-out;
+      line-height: 1.6;
+      transition: all 0.3s ease;
+    }
+    .box:hover {
+      transform: scale(1.01);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    p {
+      font-size: 1.05rem;
+      color: #ddd;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    ul li {
+      background: rgba(255, 255, 255, 0.07);
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    ul li.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    ul li:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateX(5px) scale(1.02);
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #aaa;
+      animation: fadeIn 4s ease-in-out;
+      transition: all 0.3s ease;
+    }
+    .footer:hover {
+      color: #fff;
+      text-shadow: 0 0 8px rgba(144, 202, 249, 0.6);
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes slideUp {
+      from {transform: translateY(20px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="back-btn" id="backBtn">⬅ Back</button>
+  </header>
+
+  <h1 id="name">Tayem Hassan</h1>
+  <h2>🎯 My Ambitions</h2>
+
+  <div class="box">
+    <p id="intro">
+      I am passionate about continuous learning and bringing new ideas to life. 
+      I enjoy innovation and finding practical solutions, especially in the fields of 
+      <strong>programming, electronics, and robotics</strong>. 
+      I always strive to develop my skills and build real projects that make a positive impact.
+    </p>
+
+    <ul id="goals">
+      <li>🚀 <strong>Entrepreneurship</strong>: Building projects that add value and help people.</li>
+      <li>🤖 <strong>Technology & Innovation</strong>: Designing smart systems and developing new ideas.</li>
+      <li>📚 <strong>Continuous Learning</strong>: Mastering programming languages and self-development.</li>
+      <li>🎨 <strong>Personal Creativity</strong>: Turning my ideas into tangible projects.</li>
+    </ul>
+
+    <div class="footer">
+      ✨ I aspire to inspire others to chase their dreams and leave a clear mark in technology and creativity.
+    </div>
+  </div>
+
+  <script>
+    const nameElement = document.getElementById("name");
+    const text = nameElement.innerText;
+    nameElement.innerText = "";
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        nameElement.innerText += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 120);
+      } else {
+        animateGoals();
+      }
+    }
+    typeWriter();
+
+    function animateGoals() {
+      const items = document.querySelectorAll("#goals li");
+      items.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add("visible");
+        }, index * 500);
+      });
+    }
+
+    const backBtn = document.getElementById("backBtn");
+    backBtn.addEventListener("click", () => {
+      backBtn.innerText = "⏳ Going Back...";
+      backBtn.style.background = "#357abd";
+      setTimeout(() => {
+        window.location.href = "index.html"; // حط هنا اللينك اللي عايز ترجع له
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
