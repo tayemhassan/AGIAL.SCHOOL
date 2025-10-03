@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #e6f7ff, #ffffff);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .x,
+    .y {
+      margin-top: 10px;
+      width: 246px;
+      height: 48px;
+      border: 1px solid #b3e5fc;
+      text-align: center;
+      background: #ffffff;
+      color: #333;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0, 153, 255, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .x::placeholder,
+    .y::placeholder {
+      font-size: larger;
+      color: #888;
+    }
+
+    .x:hover,
+    .y:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 12px #00aaff;
+      border-color: #00aaff;
+    }
+
+    .box {
+      margin-top: 15px;
+      color: white;
+      width: 120px;
+      height: 50px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(90deg, #00aaff, #66cfff);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 153, 255, 0.3);
+      cursor: pointer;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .box:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #00ccff;
+    }
+
+    .log {
+      color: white;
+      width: 160px;
+      height: 50px;
+      border-radius: 30px;
+      border: none;
+      font-weight: bold;
+      background: linear-gradient(to right, #ff4da6, #8a2be2);
+      box-shadow: 0 4px 12px rgba(138, 43, 226, 0.3);
+      transition: 0.4s;
+      cursor: pointer;
+      margin: 13px;
+    }
+
+    .log:hover {
+      background: linear-gradient(to right, #fff200, #81c784);
+      transform: scale(1.1);
+      box-shadow: 0 0 18px rgba(255, 221, 0, 0.5);
+    }
+
+    img {
+      margin: 25%;
+      max-width: 200px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #00ccff;
+      border: 3px solid #00ccff;
+      transition: transform 1.5s ease, box-shadow 0.5s ease, border 0.4s ease;
+    }
+
+    img:hover {
+      transform: scale(1.1) rotate(360deg);
+      box-shadow: 0 0 25px #00aaff;
+      border: 3px solid #00aaff;
+    }
+
+    div {
+      backdrop-filter: blur(8px);
+      max-width: 400px;
+      text-align: center;
+      background-color: #ffffff;
+      border-radius: 20px;
+      margin: 8% auto;
+      padding: 40px 20px 40px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e0f7fa;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="tayem4.html">
+    <b><button class="log">Create account</button></b>
+  </a>
+  <div>
+    <input class="y" type="search" placeholder="   username" autofocus>
+    <input class="x" type="password" placeholder="   password">
+    <br>
+    <button class="box">LOG IN</button>
+  </div>
+</body>
+
+</html>

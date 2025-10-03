@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Robot Car — DC Motors</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(to right, #000428, #004e92);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 900px;
+      width: 100%;
+      text-align: left;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      color: #ffd480;
+      margin-top: 18px;
+      font-size: 1.3rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    ul {
+      margin-left: 18px;
+      padding-left: 12px;
+    }
+
+    img {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 10px;
+      margin-top: 16px;
+      box-shadow: 0 0 15px #000;
+      display: block;
+    }
+
+    .next-button {
+      margin-top: 22px;
+      padding: 12px 26px;
+      background: #ff6f00;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .next-button:hover {
+      background: #e65c00;
+    }
+
+    .logo {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      width: 70px;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .specs {
+      background: rgba(255, 255, 255, 0.07);
+      padding: 14px;
+      border-radius: 10px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+        text-align: center;
+      }
+      h2 {
+        font-size: 1.1rem;
+      }
+      p, li {
+        font-size: 0.95rem;
+      }
+      .next-button {
+        width: 100%;
+        border-radius: 12px;
+      }
+      .container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="https://www.facebook.com/JupiterAcademyForKids/" target="_blank">
+    <img src="jupiter.webp" class="logo" alt="logo">
+  </a>
+  <div class="container">
+    <h1>DC Motors — What & How</h1>
+
+    <p>
+      In our car we use <strong>DC geared motors</strong>. These are small DC motors with a gearbox attached to:
+    </p>
+    <ul>
+      <li>Increase torque (push the car)</li>
+      <li>Reduce speed to a usable RPM for precise control</li>
+    </ul>
+
+    <h2>Important motor specs</h2>
+    <div class="specs">
+      <p><strong>Voltage:</strong> choose motors that match battery (e.g., 6V or 12V)</p>
+      <p><strong>Stall current:</strong> the max current at start — must be supported by motor driver</p>
+      <p><strong>RPM & gear ratio:</strong> decide speed vs torque</p>
+    </div>
+
+    <h2>How we control them</h2>
+    <p>
+      Arduino cannot drive motors directly. Instead:
+    </p>
+    <ul>
+      <li>Arduino outputs <strong>direction signals</strong> (HIGH/LOW) for each motor input.</li>
+      <li>Arduino outputs <strong>PWM</strong> to control speed (analogWrite).</li>
+      <li>The motor driver supplies the current from the battery to the motors.</li>
+    </ul>
+
+    <img src="ro.png" alt="DC motor example">
+
+    <br>
+    <a href="robot4.html"><button class="next-button">Next: Motor Driver (L298N) ➜</button></a>
+  </div>
+</body>
+</html>
