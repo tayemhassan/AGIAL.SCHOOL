@@ -9,7 +9,7 @@
     body {
       font-family: 'Segoe UI', sans-serif;
       background: radial-gradient(circle, #0f0c29, #302b63, #24243e);
-      padding-bottom: 100px;
+      padding-bottom: 60px;
       margin: 0;
     }
 
@@ -27,7 +27,6 @@
       transition: 0.3s;
       max-width: 15vw;
       height: auto;
-      z-index: 999;
     }
 
     .logo:hover {
@@ -36,7 +35,7 @@
       border-radius: 25%;
     }
 
-    .logo1 {
+        .logo1 {
       width: 70px;
       position: fixed;
       top: 20px;
@@ -46,7 +45,6 @@
       transition: 0.3s;
       max-width: 15vw;
       height: auto;
-      z-index: 999;
     }
 
     .logo1:hover {
@@ -77,14 +75,6 @@
       padding: 50px 30px;
       margin-bottom: 60px;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .level.show {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .level-one {
@@ -150,7 +140,7 @@
     }
 
     .component-link:hover {
-      transform: scale(1.05);
+      transform: scale(1.009);
       box-shadow: 0 15px 35px rgba(0, 255, 255, 0.3);
     }
 
@@ -209,7 +199,6 @@
       text-decoration: none;
       box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
       transition: all 0.3s;
-      z-index: 999;
     }
 
     .lang-btn:hover {
@@ -237,6 +226,31 @@
       font-weight: bold;
     }
 
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .enter-button {
+      padding: 15px 40px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(to right, #ff00c8, #00ffe7);
+      font-weight: bold;
+      box-shadow: 0 0 20px #00ffe7;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #fff;
+    }
+
+    .enter-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px #ff00ff, 0 0 40px #00ffe7;
+    }
+
     .new-badge {
       position: absolute;
       top: 10px;
@@ -249,43 +263,17 @@
       transform: rotate(45deg);
       text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
     }
-
-    /* زرار Back To Up */
-    #backToTop {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #90caf9;
-      color: #000;
-      padding: 12px 18px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      display: none;
-      transition: 0.3s;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      z-index: 999;
-    }
-
-    #backToTop:hover {
-      background: #64b5f6;
-      transform: scale(1.1);
-    }
   </style>
 </head>
 
 <body>
-  <a href="https://www.facebook.com/calleragial"><img src="agail.jpg" class="logo" alt="Logo"></a>
-  <a href="TAYEM111.HTML">
-    <img class="logo1" src="ChatGPT Image Sep 28, 2025, 04_03_53 PM (1).png" alt="">
-  </a>
+  
+    <img src="jupiter.webp" class="logo" alt="Logo">
 
+  <img class="logo1" src="ChatGPT Image Sep 28, 2025, 04_03_53 PM (1).png" alt="">
   <a href="index - AR.html" class="lang-btn">AR</a>
   <h1>Arduino Components | In English</h1>
   <p class="upgrade"> 🚀 Explore new updates with more modules and exciting projects </p>
-
   <div class="levels-container">
     <section class="level level-one">
       <div class="level-header">
@@ -324,9 +312,7 @@
         </a>
       </div>
     </section>
-
     <div class="separator"></div>
-
     <section class="level level-two">
       <div class="level-header">
         <div class="level-icon">🧠</div>
@@ -368,9 +354,7 @@
         </a>
       </div>
     </section>
-
     <div class="separator"></div>
-
     <section class="level level-three">
       <div class="level-header">
         <div class="level-icon">🚀</div>
@@ -380,9 +364,7 @@
         <p>coming soon !</p>
       </div>
     </section>
-
     <div class="separator"></div>
-
     <section class="level level-four">
       <div class="level-header">
         <div class="level-icon">🎓</div>
@@ -396,39 +378,17 @@
         </a>
       </div>
     </section>
-
     <p id="ff">Hi, I'm Tayem. I build engaging online projects to help you explore and learn Arduino with easly</p>
     <p id="ff">Fresh updates every week — stay tuned for something new</p>
     <p id="ff"><u class="update">update</u> : Added a new section for Components with explanation and examples like
       Bluetooth Robot Car</p>
+    <div class="button-container">
+      <a href="CODEX.html">
+        <button class="enter-button"> STYLE 💻</button>
+      </a>
+    </div>
+
   </div>
-
-  <!-- زرار Back to Up -->
-  <button id="backToTop">⬆ Back to Up</button>
-
-  <script>
-    const levels = document.querySelectorAll('.level');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
-    }, { threshold: 0.2 });
-    levels.forEach(level => { observer.observe(level); });
-
-    // Back To Up button
-    const backToTop = document.getElementById("backToTop");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 200) {
-        backToTop.style.display = "block";
-      } else {
-        backToTop.style.display = "none";
-      }
-    });
-    backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  </script>
 </body>
+
 </html>
