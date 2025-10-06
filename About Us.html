@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGIAL SCHOOL | About</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #f1f1f1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 15px 0;
+            box-shadow: 0 3px 20px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+            backdrop-filter: blur(8px);
+        }
+
+        nav a {
+            color: #f1f1f1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #90caf9;
+            text-shadow: 0 0 10px #90caf9;
+        }
+
+        section {
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 120px auto 60px;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(144, 202, 249, 0.8);
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #ddd;
+            line-height: 1.7;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        footer {
+            text-align: center;
+            color: #aaa;
+            padding: 25px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            margin-top: auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="Privacy Policy.html">Privacy Policy</a>
+        <a href="Contact.html">Contact</a>
+        <a href="index.html">Home</a>
+    </nav>
+
+    <section id="about">
+        <h1>About AGIAL SCHOOL</h1>
+        <p>
+            AGIAL School is a private educational institution dedicated to nurturing the minds of future generations.
+            With a focus on excellence, creativity, and moral values, we aim to provide students with an inspiring
+            learning environment that encourages growth, leadership, and innovation.
+            <br><br>
+            Our mission is to prepare students to face the challenges of tomorrow through high-quality education,
+            modern teaching methods, and a strong sense of community.
+        </p>
+    </section>
+
+    <footer>
+        © 2025 Agial School | All Rights Reserved / © 2025 Tayem Hassan. All Rights Reserved
+    </footer>
+</body>
+
+</html>
