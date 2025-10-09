@@ -1,59 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arduino Components Levels | EN</title>
-  <link rel="icon" href="jupiter.webp">
+  <title>AGIAL SCHOOL | Arduino Levels</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: radial-gradient(circle, #0f0c29, #302b63, #24243e);
-      padding-bottom: 60px;
-      margin: 0;
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Segoe UI',sans-serif;
+      background:radial-gradient(circle,#0f0c29,#302b63,#24243e);
+      color:#fff;
+      overflow-x:hidden;
+      padding-bottom:100px
     }
 
-    * {
-      box-sizing: border-box;
+    @keyframes glow {
+      from { text-shadow: 0 0 15px #00ffe1, 0 0 25px #ff00c8; }
+      to { text-shadow: 0 0 30px #ffd700, 0 0 45px #00ffe1; }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
     }
 
-    .logo {
-      width: 70px;
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-      transition: 0.3s;
-      max-width: 15vw;
-      height: auto;
+ 
+    nav{
+      width:100%;
+      background:rgba(15,12,41,0.35);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px 40px;
+      position:fixed;
+      top:0;left:0;
+      z-index:1000;
+      backdrop-filter:blur(10px);
+      box-shadow:0 0 25px rgba(0,255,255,0.15);
+      transition:background 0.4s ease
     }
-
-    .logo:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px #ff00f7;
-      border-radius: 25%;
+    nav:hover{background:rgba(15,12,41,0.6)}
+    nav .nav-logo{display:flex;align-items:center;gap:10px}
+    nav .nav-logo img{
+      width:45px;
+      border-radius:10px;
+      box-shadow:0 0 15px rgba(0,255,255,0.6);
+      transition:0.3s
     }
-
-    .logo1 {
-      width: 70px;
-      position: fixed;
-      top: 20px;
-      left: 100px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-      transition: 0.3s;
-      max-width: 15vw;
-      height: auto;
+    nav .nav-logo img:hover{
+      transform:scale(1.1);
+      box-shadow:0 0 20px #ff00f7
     }
-
-    .logo1:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px #ff00f7;
-      border-radius: 25%;
+    nav .nav-logo span{
+      font-size:1.3rem;
+      font-weight:700;
+      background:linear-gradient(90deg,#00ffe1,#ff00c8,#ffd700);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent
     }
+    nav ul{display:flex;list-style:none;gap:30px}
+    nav ul li a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      font-size:1rem;
+      position:relative;
+      transition:0.3s
+    }
+    nav ul li a::after{
+      content:"";
+      position:absolute;
+      width:0%;
+      height:2px;
+      background:linear-gradient(90deg,#00ffff,#ff00ff,#ffff00);
+      bottom:-5px;left:0;
+      transition:width 0.3s ease
+    }
+    nav ul li a:hover::after{width:100%}
+    nav ul li a:hover{color:#00ffe1}
 
+    /* ====== MAIN CONTENT ====== */
+    h1{
+      text-align:center;
+      margin-top:120px;
+      font-size:3.2rem;
+      background:linear-gradient(90deg,#00ffe1,#ff00c8,#ffd700);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 2px 5px rgba(0,0,0,0.3)
+    }
+    p{text-align:center;color:#ccc;font-size:1.2rem;margin-bottom:60px}
+
+    .levels-container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .level{
+      border-radius:20px;
+      padding:40px 30px;
+      margin-bottom:70px;
+      box-shadow:0 20px 50px rgba(0,0,0,0.4);
+      opacity:0;
+      transform:translateY(50px);
+      transition:opacity 0.8s ease,transform 0.8s ease
+    }
+    .level.show{opacity:1;transform:translateY(0)}
+    .level-one{background:linear-gradient(135deg,#1e3c72,#0b3177)}
+    .level-two{background:linear-gradient(135deg,#4f2a98,#e90a4d)}
+    .level-three{background:linear-gradient(135deg,#ff4e50,#f9d423)}
+    .level-four{background:linear-gradient(135deg,#b21ce0,#000851)}
+    .level-header{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-bottom:30px;
+      text-align:center
+    }
+    .level-icon{
+      font-size:3rem;
+      background:rgba(255,255,255,0.1);
+      padding:25px;
+      border-radius:50%;
+      border:#fff 3px solid;
+      box-shadow:inset 0 0 20px rgb(187,184,184),0 0 20px rgb(187,184,184)
+    }
+    .level-title{
+      font-size:2rem;
+      font-weight:800;
+      color:#fff;
+      text-shadow:0 0 15px rgba(255,255,255,0.5)
+    }
+    .image-container{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:30px
+    }
+    .component-link{
+      background:rgba(255,255,255,0.05);
+      border-radius:20px;
+      padding:15px;
+      width:220px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.5);
+      text-align:center;
+      text-decoration:none;
+      transition:transform 0.3s ease,box-shadow 0.3s ease;
+      position:relative
+    }
+    .component-link:hover{
+      transform:scale(1.05);
+      box-shadow:0 15px 35px rgba(0,255,255,0.3)
+    }
+    .component-img{
+      width:100%;
+      max-height:150px;
+      object-fit:cover;
+      border-radius:15px;
+      border:2px solid #fff;
+      box-shadow:0 5px 15px rgba(255,255,255,0.4);
+      transition:0.4s ease
+    }
+    .component-name{
+      margin-top:12px;
+      font-weight:bold;
+      font-size:1.1rem;
+      color:#fff;
+      opacity:0;
+      transition:opacity 0.3s ease
+    }
+    .component-link:hover .component-name{opacity:1}
+    .separator{
+      height:8px;
+      width:80%;
+      margin:50px auto;
+      border-radius:5px;
+      background:linear-gradient(90deg,#00ffff,#ff00ff,#ffff00)
+    }
+    #ff{
+      margin:10px auto;
+      max-width:90%;
+      font-size:1.4rem;
+      text-align:center;
+      color:#fff
+    }
+    #backToTop{
+      position:fixed;
+      bottom:30px;
+      right:30px;
+      background:#90caf9;
+      color:#000;
+      padding:12px 18px;
+      border:none;
+      border-radius:25px;
+      cursor:pointer;
+      font-size:1rem;
+      font-weight:bold;
+      display:none;
+      transition:0.3s;
+      box-shadow:0 5px 15px rgba(0,0,0,0.3);
+      z-index:999
+    }
+        #ff {
+          margin-top: 50%;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 90%;
+      font-size: 1.6rem;
+      text-align: center;
+    }
+    
     h1 {
       text-align: center;
       margin-top: 100px;
@@ -65,119 +217,6 @@
       padding: 0 10px;
     }
 
-    .levels-container {
-      max-width: 1200px;
-      margin: 60px auto;
-      padding: 0 20px;
-    }
-
-    .level {
-      border-radius: 20px;
-      padding: 50px 30px;
-      margin-bottom: 60px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-    }
-
-    .level-one {
-      background: linear-gradient(135deg, #1e3c72, #0b3177);
-    }
-
-    .level-two {
-      background: linear-gradient(135deg, #4f2a98, #e90a4d);
-    }
-
-    .level-three {
-      background: linear-gradient(135deg, #ff4e50, #f9d423);
-    }
-
-    .level-four {
-      background: linear-gradient(135deg, #b21ce0, #000851);
-    }
-
-    .level-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-
-    .level-icon {
-      font-size: 3rem;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 25px;
-      border-radius: 50%;
-      border: #fff 3px solid;
-      box-shadow: inset 0 0 20px rgb(187, 184, 184), 0 0 20px rgb(187, 184, 184);
-    }
-
-    .level-title {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: #fff;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-    }
-
-    .image-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-    }
-
-    .component-link {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      padding: 15px;
-      width: 220px;
-      max-width: 90vw;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-      text-align: center;
-      text-decoration: none;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-    }
-
-    .component-link:hover {
-      transform: scale(1.009);
-      box-shadow: 0 15px 35px rgba(0, 255, 255, 0.3);
-    }
-
-    .component-img {
-      width: 100%;
-      height: auto;
-      max-height: 150px;
-      object-fit: cover;
-      border-radius: 15px;
-      border: 2px solid #fff;
-      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
-      transition: 0.4s ease;
-    }
-
-    .component-name {
-      margin-top: 12px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      color: #fff;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      user-select: none;
-    }
-
-    .component-link:hover .component-name {
-      opacity: 1;
-    }
-
-    .separator {
-      height: 8px;
-      width: 80%;
-      margin: 50px auto;
-      border-radius: 5px;
-      background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00);
-    }
-
     p {
       font-size: 2.2rem;
       font-weight: 900;
@@ -187,38 +226,10 @@
       padding: 0 10px;
     }
 
-    .lang-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 15px 18px;
-      background: #fff;
-      border-radius: 12px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #9909a7;
-      text-decoration: none;
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
-      transition: all 0.3s;
-    }
-
-    .lang-btn:hover {
-      border-radius: 25%;
-      transform: scale(1.08);
-      box-shadow: 0 0 15px #ff00f7;
-    }
-
-    #ff {
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 90%;
-      font-size: 1.6rem;
-      text-align: center;
-    }
-
     .update {
       background: linear-gradient(45deg, #ff3b3b, #ff7f00, #ffff00, #00ff00, #00bfff, #8a2be2);
       -webkit-background-clip: text;
+
       color: transparent;
       font-weight: bold;
     }
@@ -226,261 +237,18 @@
     .upgrade {
       font-weight: bold;
     }
-
-    .button-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 40px;
-    }
-
-    .enter-button {
-      padding: 15px 40px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      background: linear-gradient(to right, #ff00c8, #00ffe7);
-      font-weight: bold;
-      box-shadow: 0 0 20px #00ffe7;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      color: #fff;
-    }
-
-    .enter-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 30px #ff00ff, 0 0 40px #00ffe7;
-    }
-
-    .new-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: linear-gradient(45deg, #ff3b3b, #ff7f00, #ffff00, #00ff00, #00bfff, #8a2be2);
-      -webkit-background-clip: text;
-      color: transparent;
-      font-weight: bold;
-      font-size: 1.1rem;
-      transform: rotate(45deg);
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
-    }
-
-    nav {
-      width: 100%;
-      background: rgba(15, 12, 41, 0.35);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 40px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
-      transition: background 0.4s ease
-    }
-
-    nav:hover {
-      background: rgba(15, 12, 41, 0.6)
-    }
-
-    nav .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px
-    }
-
-    nav .nav-logo img {
-      width: 45px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
-      transition: 0.3s
-    }
-
-    nav .nav-logo img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px #ff00f7
-    }
-
-    nav .nav-logo span {
-      font-size: 1.3rem;
-      font-weight: 700;
-      background: linear-gradient(90deg, #00ffe1, #ff00c8, #ffd700);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 30px
-    }
-
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      position: relative;
-      transition: 0.3s
-    }
-
-    nav ul li a::after {
-      content: "";
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00);
-      bottom: -5px;
-      left: 0;
-      transition: width 0.3s ease
-    }
-
-    nav ul li a:hover::after {
-      width: 100%
-    }
-
-    nav ul li a:hover {
-      color: #00ffe1
+    #backToTop:hover{background:#64b5f6;transform:scale(1.1)}
+    footer{
+      text-align:center;
+      color:#aaa;
+      padding:25px 0;
+      margin-top:50px
     }
   </style>
 </head>
-
 <body>
 
 
-  <nav>
-    <div class="nav-logo">
-      <a href="https://www.facebook.com/JupiterAcademyForKids/"><img src="jupiter.webp" alt="Logo"></a>
-
-      <span> jupiter Academy</span>
-    </div>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="About Us.html">About</a></li>
-      <li><a href="Privacy Policy.html">Privacy</a></li>
-      <li><a href="Contact.html">Contact</a></li>
-      <li><a href="index - AR.html">AR</a></li>
-    </ul>
-  </nav>
-  <h1>Arduino Components | In English</h1>
-  <p class="upgrade"> 🚀 Explore new updates with more modules and exciting projects </p>
-  <div class="levels-container">
-    <section class="level level-one">
-      <div class="level-header">
-        <div class="level-icon">🌐</div>
-        <h2 class="level-title">Rank 1: Beginner</h2>
-      </div>
-      <div class="image-container">
-        <a href="ARDUINO UNO.html" class="component-link">
-          <img src="arduino.jpg" alt="Arduino UNO" class="component-img">
-          <div class="component-name">Arduino UNO</div>
-        </a>
-        <a href="breadboard.html" class="component-link">
-          <img src="bread-png.jpg" alt="Breadboard" class="component-img">
-          <div class="component-name">Breadboard</div>
-        </a>
-        <a href="LED.html" class="component-link">
-          <img src="led-png.jpg" alt="LED" class="component-img">
-          <div class="component-name">LED</div>
-        </a>
-        <a href="buzzer.html" class="component-link">
-          <img src="buzzer-png.jpg" alt="Buzzer" class="component-img">
-          <div class="component-name">Buzzer</div>
-        </a>
-        <a href="pushbutton.html" class="component-link">
-          <img src="BUSSH.jpg" alt="Push Button" class="component-img">
-          <div class="component-name">Push Button</div>
-        </a>
-        <a href="RGB led.html" class="component-link">
-          <img src="RGB1.jpg" alt="RGB LED" class="component-img">
-          <div class="component-name">RGB LED</div>
-        </a>
-        <a href="poton1.html" class="component-link">
-          <div class="new-badge">NEW!!</div>
-          <img src="poton-png.jpg" alt="Potentiometer" class="component-img">
-          <div class="component-name">Potentiometer</div>
-        </a>
-      </div>
-    </section>
-    <div class="separator"></div>
-    <section class="level level-two">
-      <div class="level-header">
-        <div class="level-icon">🧠</div>
-        <h2 class="level-title">Rank 2: Intermediate</h2>
-      </div>
-      <div class="image-container">
-        <a href="servo.html" class="component-link">
-          <img src="servo1.jpg" alt="Servo Motor" class="component-img">
-          <div class="component-name">Servo Motor</div>
-        </a>
-        <a href="LCD.html" class="component-link">
-          <img src="LCD.jpg" alt="LCD" class="component-img">
-          <div class="component-name">LCD Display</div>
-        </a>
-        <a href="ultra1.html" class="component-link">
-          <div class="new-badge">NEW!!</div>
-          <img src="ultra1.jpg" alt="Ultrasonic" class="component-img">
-          <div class="component-name">Ultrasonic</div>
-        </a>
-        <a href="relay1.html" class="component-link">
-          <div class="new-badge">NEW!!</div>
-          <img src="relay1.jpg" alt="Relay" class="component-img">
-          <div class="component-name">Relay</div>
-        </a>
-        <a href="bluetooth1.html" class="component-link">
-          <div class="new-badge">NEW!!</div>
-          <img src="bluetooth1.jpg" alt="Bluetooth" class="component-img">
-          <div class="component-name">Bluetooth</div>
-        </a>
-        <a href="DC1.html" class="component-link">
-          <div class="new-badge">NEW!!</div>
-          <img src="dc.jpg" alt="DC Motor" class="component-img">
-          <div class="component-name">DC Motor</div>
-        </a>
-        <a href="7.html" class="component-link">
-          <div class="new-badge">NEW!!</div>
-          <img src="7.jpg" alt="7 Segment" class="component-img">
-          <div class="component-name">7 Segment</div>
-        </a>
-      </div>
-    </section>
-    <div class="separator"></div>
-    <section class="level level-three">
-      <div class="level-header">
-        <div class="level-icon">🚀</div>
-        <h2 class="level-title">Rank 3: Advanced</h2>
-      </div>
-      <div class="image-container">
-        <p>coming soon !</p>
-      </div>
-    </section>
-    <div class="separator"></div>
-    <section class="level level-four">
-      <div class="level-header">
-        <div class="level-icon">🎓</div>
-        <h2 class="level-title">Rank 4: Projects</h2>
-      </div>
-      <div class="image-container">
-        <a href="robot1.html" class="component-link">
-          <div class="new-badge">NEW!!</div>
-          <img src="robot car.jfif" class="component-img">
-          <div class="component-name">Bluetooth Robot Car</div>
-        </a>
-      </div>
-    </section>
-    <p id="ff">Hi, I'm Tayem. I build engaging online projects to help you explore and learn Arduino with easly</p>
-    <p id="ff">Fresh updates every week — stay tuned for something new</p>
-    <p id="ff"><u class="update">update</u> : Added a new section for Components with explanation and examples like
-      Bluetooth Robot Car</p>
-    <div class="button-container">
-      <a href="CODEX.html">
-        <button class="enter-button"> STYLE 💻</button>
-      </a>
-    </div>
-
-  </div>
+  <p class="ff">Sorry for the delay! <br> We’re working on some updates and fixing a few issues. <br> Things might take a little time, but we’ll be back better than ever. <br> Thanks for your patienc</p>
 </body>
-
 </html>
