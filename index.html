@@ -1,254 +1,830 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AGIAL SCHOOL | Arduino Levels</title>
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:'Segoe UI',sans-serif;
-      background:radial-gradient(circle,#0f0c29,#302b63,#24243e);
-      color:#fff;
-      overflow-x:hidden;
-      padding-bottom:100px
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      overflow-x: hidden;
+      padding-bottom: 100px
+    }
+
+    nav {
+      width: 100%;
+      background: rgba(15, 12, 41, 0.35);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+      transition: background 0.4s ease;
+      flex-wrap: wrap;
+    }
+
+    nav:hover {
+      background: rgba(15, 12, 41, 0.6)
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .nav-logo img {
+      width: 45px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+      transition: 0.3s
+    }
+
+    .nav-logo img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #ff00f7
+    }
+
+    .nav-logo span {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #00ffe1, #ff00c8, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      transition: all 0.4s ease;
+      align-items: center;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      position: relative;
+      transition: 0.3s
+    }
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00);
+      bottom: -5px;
+      left: 0;
+      transition: width 0.3s ease
+    }
+
+    nav ul li a:hover::after {
+      width: 100%
+    }
+
+    nav ul li a:hover {
+      color: #00ffe1
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle div {
+      width: 100%;
+      height: 3px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active div:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle.active div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active div:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    @media (max-width:850px) {
+      nav ul {
+        flex-direction: column;
+        width: 100%;
+        background: rgba(15, 12, 41, 0.95);
+        position: absolute;
+        top: 70px;
+        left: 0;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(-20px);
+        pointer-events: none;
+        transition: all 0.4s ease;
+      }
+
+      nav ul.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+        padding: 20px 0;
+      }
+
+      nav ul li {
+        padding: 10px 0
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
+    /* Language Dropdown Button */
+    .language-btn {
+      background: #1e1e2f;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .language-btn:hover {
+      background: #00ffe1;
+      color: #000;
+    }
+
+    .language-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .language-dropdown .dropdown-menu {
+      position: absolute;
+      top: 40px;
+      left: 0;
+      background: rgba(15, 12, 41, 0.95);
+      list-style: none;
+      padding: 10px 0;
+      border-radius: 10px;
+      display: none; /* نخليها مخفية افتراضي */
+      min-width: 120px;
+      text-align: center;
+      z-index: 999;
+    }
+
+    .language-dropdown .dropdown-menu.show {
+      display: block; /* تظهر لما يضاف كلاس show */
+    }
+
+    .language-dropdown .dropdown-menu li a {
+      display: block;
+      padding: 8px 15px;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .language-dropdown .dropdown-menu li a:hover {
+      background: #00ffe1;
+      color: #000;
+    }
+        * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      overflow-x: hidden;
+      padding-bottom: 100px
     }
 
     @keyframes glow {
-      from { text-shadow: 0 0 15px #00ffe1, 0 0 25px #ff00c8; }
-      to { text-shadow: 0 0 30px #ffd700, 0 0 45px #00ffe1; }
+      from {
+        text-shadow: 0 0 15px #00ffe1, 0 0 25px #ff00c8;
+      }
+
+      to {
+        text-shadow: 0 0 30px #ffd700, 0 0 45px #00ffe1;
+      }
     }
+
     @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
     }
 
- 
-    nav{
-      width:100%;
-      background:rgba(15,12,41,0.35);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:10px 40px;
-      position:fixed;
-      top:0;left:0;
-      z-index:1000;
-      backdrop-filter:blur(10px);
-      box-shadow:0 0 25px rgba(0,255,255,0.15);
-      transition:background 0.4s ease
+    nav {
+      width: 100%;
+      background: rgba(15, 12, 41, 0.35);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+      transition: background 0.4s ease;
+      flex-wrap: wrap;
     }
-    nav:hover{background:rgba(15,12,41,0.6)}
-    nav .nav-logo{display:flex;align-items:center;gap:10px}
-    nav .nav-logo img{
-      width:45px;
-      border-radius:10px;
-      box-shadow:0 0 15px rgba(0,255,255,0.6);
-      transition:0.3s
-    }
-    nav .nav-logo img:hover{
-      transform:scale(1.1);
-      box-shadow:0 0 20px #ff00f7
-    }
-    nav .nav-logo span{
-      font-size:1.3rem;
-      font-weight:700;
-      background:linear-gradient(90deg,#00ffe1,#ff00c8,#ffd700);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent
-    }
-    nav ul{display:flex;list-style:none;gap:30px}
-    nav ul li a{
-      color:#fff;
-      text-decoration:none;
-      font-weight:600;
-      font-size:1rem;
-      position:relative;
-      transition:0.3s
-    }
-    nav ul li a::after{
-      content:"";
-      position:absolute;
-      width:0%;
-      height:2px;
-      background:linear-gradient(90deg,#00ffff,#ff00ff,#ffff00);
-      bottom:-5px;left:0;
-      transition:width 0.3s ease
-    }
-    nav ul li a:hover::after{width:100%}
-    nav ul li a:hover{color:#00ffe1}
 
-    /* ====== MAIN CONTENT ====== */
-    h1{
-      text-align:center;
-      margin-top:120px;
-      font-size:3.2rem;
-      background:linear-gradient(90deg,#00ffe1,#ff00c8,#ffd700);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      text-shadow:0 2px 5px rgba(0,0,0,0.3)
+    nav:hover {
+      background: rgba(15, 12, 41, 0.6)
     }
-    p{text-align:center;color:#ccc;font-size:1.2rem;margin-bottom:60px}
 
-    .levels-container{max-width:1200px;margin:0 auto;padding:0 20px}
-    .level{
-      border-radius:20px;
-      padding:40px 30px;
-      margin-bottom:70px;
-      box-shadow:0 20px 50px rgba(0,0,0,0.4);
-      opacity:0;
-      transform:translateY(50px);
-      transition:opacity 0.8s ease,transform 0.8s ease
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px
     }
-    .level.show{opacity:1;transform:translateY(0)}
-    .level-one{background:linear-gradient(135deg,#1e3c72,#0b3177)}
-    .level-two{background:linear-gradient(135deg,#4f2a98,#e90a4d)}
-    .level-three{background:linear-gradient(135deg,#ff4e50,#f9d423)}
-    .level-four{background:linear-gradient(135deg,#b21ce0,#000851)}
-    .level-header{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:20px;
-      flex-wrap:wrap;
-      margin-bottom:30px;
-      text-align:center
+
+    .nav-logo img {
+      width: 45px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+      transition: 0.3s
     }
-    .level-icon{
-      font-size:3rem;
-      background:rgba(255,255,255,0.1);
-      padding:25px;
-      border-radius:50%;
-      border:#fff 3px solid;
-      box-shadow:inset 0 0 20px rgb(187,184,184),0 0 20px rgb(187,184,184)
+
+    .nav-logo img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #ff00f7
     }
-    .level-title{
-      font-size:2rem;
-      font-weight:800;
-      color:#fff;
-      text-shadow:0 0 15px rgba(255,255,255,0.5)
+
+    .nav-logo span {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #00ffe1, #ff00c8, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent
     }
-    .image-container{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:30px
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      transition: all 0.4s ease;
     }
-    .component-link{
-      background:rgba(255,255,255,0.05);
-      border-radius:20px;
-      padding:15px;
-      width:220px;
-      box-shadow:0 8px 25px rgba(0,0,0,0.5);
-      text-align:center;
-      text-decoration:none;
-      transition:transform 0.3s ease,box-shadow 0.3s ease;
-      position:relative
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      position: relative;
+      transition: 0.3s
     }
-    .component-link:hover{
-      transform:scale(1.05);
-      box-shadow:0 15px 35px rgba(0,255,255,0.3)
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00);
+      bottom: -5px;
+      left: 0;
+      transition: width 0.3s ease
     }
-    .component-img{
-      width:100%;
-      max-height:150px;
-      object-fit:cover;
-      border-radius:15px;
-      border:2px solid #fff;
-      box-shadow:0 5px 15px rgba(255,255,255,0.4);
-      transition:0.4s ease
+
+    nav ul li a:hover::after {
+      width: 100%
     }
-    .component-name{
-      margin-top:12px;
-      font-weight:bold;
-      font-size:1.1rem;
-      color:#fff;
-      opacity:0;
-      transition:opacity 0.3s ease
+
+    nav ul li a:hover {
+      color: #00ffe1
     }
-    .component-link:hover .component-name{opacity:1}
-    .separator{
-      height:8px;
-      width:80%;
-      margin:50px auto;
-      border-radius:5px;
-      background:linear-gradient(90deg,#00ffff,#ff00ff,#ffff00)
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+      transition: transform 0.3s ease;
     }
-    #ff{
-      margin:10px auto;
-      max-width:90%;
-      font-size:1.4rem;
-      text-align:center;
-      color:#fff
+
+    .menu-toggle div {
+      width: 100%;
+      height: 3px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
     }
-    #backToTop{
-      position:fixed;
-      bottom:30px;
-      right:30px;
-      background:#90caf9;
-      color:#000;
-      padding:12px 18px;
-      border:none;
-      border-radius:25px;
-      cursor:pointer;
-      font-size:1rem;
-      font-weight:bold;
-      display:none;
-      transition:0.3s;
-      box-shadow:0 5px 15px rgba(0,0,0,0.3);
-      z-index:999
+
+    .menu-toggle.active div:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
     }
-        #ff {
-          margin-top: 50%;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 90%;
-      font-size: 1.6rem;
-      text-align: center;
+
+    .menu-toggle.active div:nth-child(2) {
+      opacity: 0;
     }
-    
+
+    .menu-toggle.active div:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    @media (max-width:850px) {
+      nav ul {
+        flex-direction: column;
+        width: 100%;
+        background: rgba(15, 12, 41, 0.95);
+        position: absolute;
+        top: 70px;
+        left: 0;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(-20px);
+        pointer-events: none;
+        transition: all 0.4s ease;
+      }
+
+      nav ul.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+        padding: 20px 0;
+      }
+
+      nav ul li {
+        padding: 10px 0
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
     h1 {
       text-align: center;
-      margin-top: 100px;
+      margin-top: 120px;
       font-size: 3.2rem;
       background: linear-gradient(90deg, #00ffe1, #ff00c8, #ffd700);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      padding: 0 10px;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3)
     }
 
     p {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: #ffffff;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
       text-align: center;
-      padding: 0 10px;
+      color: #ccc;
+      font-size: 1.2rem;
+      margin-bottom: 60px
     }
 
-    .update {
-      background: linear-gradient(45deg, #ff3b3b, #ff7f00, #ffff00, #00ff00, #00bfff, #8a2be2);
-      -webkit-background-clip: text;
+    .levels-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px
+    }
 
-      color: transparent;
+    .level {
+      border-radius: 20px;
+      padding: 40px 30px;
+      margin-bottom: 70px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease
+    }
+
+    .level.show {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .level-one {
+      background: linear-gradient(135deg, #1e3c72, #0b3177)
+    }
+
+    .level-two {
+      background: linear-gradient(135deg, #4f2a98, #e90a4d)
+    }
+
+    .level-three {
+      background: linear-gradient(135deg, #ff4e50, #f9d423)
+    }
+
+    .level-four {
+      background: linear-gradient(135deg, #b21ce0, #000851)
+    }
+
+    .level-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+      text-align: center
+    }
+
+    .level-icon {
+      font-size: 3rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 50%;
+      border: #fff 3px solid;
+      box-shadow: inset 0 0 20px rgb(187, 184, 184), 0 0 20px rgb(187, 184, 184)
+    }
+
+    .level-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.5)
+    }
+
+    .image-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px
+    }
+
+    .component-link {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 15px;
+      width: 220px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative
+    }
+
+    .component-link:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 35px rgba(0, 255, 255, 0.3)
+    }
+
+    .component-img {
+      width: 100%;
+      max-height: 150px;
+      object-fit: cover;
+      border-radius: 15px;
+      border: 2px solid #fff;
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+      transition: 0.4s ease
+    }
+
+    .component-name {
+      margin-top: 12px;
       font-weight: bold;
+      font-size: 1.1rem;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.3s ease
     }
 
-    .upgrade {
-      font-weight: bold;
+    .component-link:hover .component-name {
+      opacity: 1
     }
-    #backToTop:hover{background:#64b5f6;transform:scale(1.1)}
-    footer{
-      text-align:center;
-      color:#aaa;
-      padding:25px 0;
-      margin-top:50px
+
+    .separator {
+      height: 8px;
+      width: 80%;
+      margin: 50px auto;
+      border-radius: 5px;
+      background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00)
+    }
+
+    #ff {
+      margin: 10px auto;
+      max-width: 90%;
+      font-size: 1.4rem;
+      text-align: center;
+      color: #fff
+    }
+
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #90caf9;
+      color: #000;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      display: none;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      z-index: 999
+    }
+
+    #backToTop:hover {
+      background: #64b5f6;
+      transform: scale(1.1)
+    }
+
+    footer {
+      text-align: center;
+      color: #aaa;
+      padding: 25px 0;
+      margin-top: 50px
     }
   </style>
 </head>
+
 <body>
+  <nav>
+    <div class="nav-logo">
+      <a href="https://www.facebook.com/calleragial"><img src="agail.jpg" alt="Logo"></a>
+      <span>AGIAL SCHOOL</span>
+    </div>
+    <button class="menu-toggle" id="menuBtn">
+      <div></div>
+      <div></div>
+      <div></div>
+    </button>
+    <ul id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="About Us.html">About</a></li>
+      <li><a href="Privacy Policy.html">Privacy</a></li>
+      <li><a href="Contact.html">Contact</a></li>
+      <li class="language-dropdown">
+        <button class="language-btn" id="languageBtn">🌐 Language ▾</button>
+        <ul class="dropdown-menu" id="languageMenu">
+          <li><a href="#" data-lang="en">English</a></li>
+          <li><a href="#" data-lang="ar">العربية</a></li>
+          <li><a href="#" data-lang="es">Español</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 
+  <h1>Arduino Components | In English</h1>
+  <p>🚀 Explore new updates with more modules and exciting projects</p>
 
-  <p class="ff">Sorry for the delay! <br> We’re working on some updates and fixing a few issues. <br> Things might take a little time, but we’ll be back better than ever. <br> Thanks for your patienc</p>
+  <div class="levels-container">
+ <section class="level level-one">
+      <div class="level-header">
+        <div class="level-icon">🌐</div>
+        <h2 class="level-title">Rank 1: Beginner</h2>
+      </div>
+      <div class="image-container">
+        <a href="ARDUINO UNO.html" class="component-link"><img src="arduino.jpg" class="component-img">
+          <div class="component-name">Arduino UNO</div>
+        </a>
+        <a href="breadboard.html" class="component-link"><img src="bread-png.jpg" class="component-img">
+          <div class="component-name">Breadboard</div>
+        </a>
+        <a href="LED.html" class="component-link"><img src="led-png.jpg" class="component-img">
+          <div class="component-name">LED</div>
+        </a>
+        <a href="buzzer.html" class="component-link"><img src="buzzer-png.jpg" class="component-img">
+          <div class="component-name">Buzzer</div>
+        </a>
+        <a href="pushbutton.html" class="component-link"><img src="BUSSH.jpg" class="component-img">
+          <div class="component-name">Push Button</div>
+        </a>
+        <a href="RGB led.html" class="component-link"><img src="RGB1.jpg" class="component-img">
+          <div class="component-name">RGB LED</div>
+        </a>
+        <a href="poton1.html" class="component-link"><img src="poton-png.jpg" class="component-img">
+          <div class="component-name">Potentiometer</div>
+        </a>
+      </div>
+    </section>
+    <div class="separator"></div>
+    <section class="level level-two">
+      <div class="level-header">
+        <div class="level-icon">🧠</div>
+        <h2 class="level-title">Rank 2: Intermediate</h2>
+      </div>
+      <div class="image-container">
+        <a href="servo.html" class="component-link"><img src="servo1.jpg" class="component-img">
+          <div class="component-name">Servo Motor</div>
+        </a>
+        <a href="LCD.html" class="component-link"><img src="LCD.jpg" class="component-img">
+          <div class="component-name">LCD Display</div>
+        </a>
+        <a href="ultra1.html" class="component-link"><img src="ultra1.jpg" class="component-img">
+          <div class="component-name">Ultrasonic</div>
+        </a>
+        <a href="relay1.html" class="component-link"><img src="relay1.jpg" class="component-img">
+          <div class="component-name">Relay</div>
+        </a>
+        <a href="bluetooth1.html" class="component-link"><img src="bluetooth1.jpg" class="component-img">
+          <div class="component-name">Bluetooth</div>
+        </a>
+        <a href="DC1.html" class="component-link"><img src="dc.jpg" class="component-img">
+          <div class="component-name">DC Motor</div>
+        </a>
+        <a href="7.html" class="component-link"><img src="7.jpg" class="component-img">
+          <div class="component-name">7 Segment</div>
+        </a>
+      </div>
+    </section>
+    <div class="separator"></div>
+    <section class="level level-three">
+      <div class="level-header">
+        <div class="level-icon">🚀</div>
+        <h2 class="level-title">Rank 3: Advanced</h2>
+      </div>
+      <div class="image-container">
+        <p><b>coming soon !</b></p>
+      </div>
+    </section>
+    <div class="separator"></div>
+    <section class="level level-four">
+      <div class="level-header">
+        <div class="level-icon">🎓</div>
+        <h2 class="level-title">Rank 4: Projects</h2>
+      </div>
+      <div class="image-container"><a href="robot1.html" class="component-link"><img src="robot car.jfif"
+            class="component-img">
+          <div class="component-name">Bluetooth Robot Car</div>
+        </a></div>
+    </section>
+    <p id="ff">Hi, I'm Tayem. I build engaging online projects to help you explore and learn Arduino easily.</p>
+    <p id="ff">Fresh updates every week — stay tuned for something new</p>
+    <p id="ff"><span class="update">Update:</span> Added a new section for Components with explanation and examples like
+      Bluetooth Robot Car</p>
+  </div>
+
+  <button id="backToTop">⬆ Back to Up</button>
+  <footer>© 2025 Agial School | All Rights Reserved / © 2025 Tayem Hassan. All Rights Reserved</footer>
+
+  <script>
+    // Scroll reveal for levels
+    const levels = document.querySelectorAll('.level');
+    function revealLevels() {
+      const windowHeight = window.innerHeight;
+      levels.forEach(level => {
+        const levelTop = level.getBoundingClientRect().top;
+        if (levelTop < windowHeight - 100) {
+          level.classList.add('show');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealLevels);
+    window.addEventListener('load', revealLevels);
+
+    // Navbar toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      menuBtn.classList.toggle('active');
+    });
+
+    // Back to top button
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) backToTop.style.display = 'block';
+      else backToTop.style.display = 'none';
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Language dropdown toggle
+    const languageBtn = document.getElementById('languageBtn');
+    const languageMenu = document.getElementById('languageMenu');
+
+    languageBtn.addEventListener('click', () => {
+      languageMenu.classList.toggle('show');
+    });
+
+    // إخفاء القائمة لو ضغط المستخدم براها
+    window.addEventListener('click', (e) => {
+      if (!languageBtn.contains(e.target) && !languageMenu.contains(e.target)) {
+        languageMenu.classList.remove('show');
+      }
+    });
+
+    // Language switcher
+    const langLinks = document.querySelectorAll('.dropdown-menu a');
+    const translations = {
+      en: {
+        title: "Arduino Components | In English",
+        description: "🚀 Explore new updates with more modules and exciting projects",
+        levels: { 1: "Rank 1: Beginner", 2: "Rank 2: Intermediate", 3: "Rank 3: Advanced", 4: "Rank 4: Projects" },
+        components: {
+          "Arduino UNO": "Arduino UNO", "Breadboard": "Breadboard", "LED": "LED", "Buzzer": "Buzzer",
+          "Push Button": "Push Button", "RGB LED": "RGB LED", "Potentiometer": "Potentiometer", "Servo Motor": "Servo Motor",
+          "LCD Display": "LCD Display", "Ultrasonic": "Ultrasonic", "Relay": "Relay", "Bluetooth": "Bluetooth",
+          "DC Motor": "DC Motor", "7 Segment": "7 Segment", "Bluetooth Robot Car": "Bluetooth Robot Car"
+        }
+      },
+      ar: {
+  title: "مكونات أردوينو | بالعربية",
+  description: "🚀 استكشف التحديثات الجديدة مع المزيد من الموديولات والمشاريع المثيرة",
+  levels: {
+    1: "المرحلة 1: مبتدئ",
+    2: "المرحلة 2: متوسط",
+    3: "المرحلة 3: متقدم",
+    4: "المرحلة 4: مشاريع"
+  },
+  components: {
+    "Arduino UNO": "أردوينو أونو",
+    "Breadboard": "لوحة تجارب",
+    "LED": "مصباح LED",
+    "Buzzer": "جهاز التنبيه",
+    "Push Button": "زر ضغط",
+    "RGB LED": "LED متعدد الألوان",
+    "Potentiometer": "مقاومة متغيرة",
+    "Servo Motor": "محرك سيرفو",
+    "LCD Display": "شاشة LCD",
+    "Ultrasonic": "حساس مسافة",
+    "Relay": "ريليه",
+    "Bluetooth": "بلوتوث",
+    "DC Motor": "محرك تيار مستمر",
+    "7 Segment": "سبعة مقاطع",
+    "Bluetooth Robot Car": "سيارة روبوت بلوتوث"
+  }
+}
+,
+     es: {
+  title: "Componentes de Arduino | En Español",
+  description: "🚀 Explora nuevas actualizaciones con más módulos y proyectos emocionantes",
+  levels: {
+    1: "Nivel 1: Principiante",
+    2: "Nivel 2: Intermedio",
+    3: "Nivel 3: Avanzado",
+    4: "Nivel 4: Proyectos"
+  },
+  components: {
+    "Arduino UNO": "Arduino UNO",
+    "Breadboard": "Protoboard",
+    "LED": "LED",
+    "Buzzer": "Zumbador",
+    "Push Button": "Botón",
+    "RGB LED": "LED RGB",
+    "Potentiometer": "Potenciómetro",
+    "Servo Motor": "Motor Servo",
+    "LCD Display": "Pantalla LCD",
+    "Ultrasonic": "Sensor Ultrasónico",
+    "Relay": "Relé",
+    "Bluetooth": "Bluetooth",
+    "DC Motor": "Motor DC",
+    "7 Segment": "Display de 7 Segmentos",
+    "Bluetooth Robot Car": "Coche Robot Bluetooth"
+  }
+}
+
+    };
+
+    langLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const lang = link.dataset.lang;
+        document.querySelector('h1').textContent = translations[lang].title;
+        document.querySelector('p').textContent = translations[lang].description;
+        document.querySelectorAll('.level-title').forEach((el, idx) => el.textContent = translations[lang].levels[idx + 1]);
+        document.querySelectorAll('.component-name').forEach(el => {
+          const key = el.textContent.trim();
+          if (translations[lang].components[key]) el.textContent = translations[lang].components[key];
+        });
+      });
+    });
+  </script>
 </body>
+
 </html>
