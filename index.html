@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AGIAL SCHOOL | Arduino Levels</title>
+  <link rel="icon" href="agail.jpg">
   <style>
     * {
       box-sizing: border-box;
@@ -198,14 +200,16 @@
       list-style: none;
       padding: 10px 0;
       border-radius: 10px;
-      display: none; /* نخليها مخفية افتراضي */
+      display: none;
+      /* نخليها مخفية افتراضي */
       min-width: 120px;
       text-align: center;
       z-index: 999;
     }
 
     .language-dropdown .dropdown-menu.show {
-      display: block; /* تظهر لما يضاف كلاس show */
+      display: block;
+      /* تظهر لما يضاف كلاس show */
     }
 
     .language-dropdown .dropdown-menu li a {
@@ -220,7 +224,8 @@
       background: #00ffe1;
       color: #000;
     }
-        * {
+
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0
@@ -437,7 +442,7 @@
     }
 
     .level-one {
-      background: linear-gradient(135deg, #1e3c72, #0b3177)
+      background: linear-gradient(135deg, #1e3c72, #4f2a98)
     }
 
     .level-two {
@@ -445,7 +450,7 @@
     }
 
     .level-three {
-      background: linear-gradient(135deg, #ff4e50, #f9d423)
+      background: linear-gradient(135deg, #e90a4d, #b21ce0)
     }
 
     .level-four {
@@ -538,7 +543,7 @@
       max-width: 90%;
       font-size: 1.4rem;
       text-align: center;
-      color: #fff
+      color: #ffffff
     }
 
     #backToTop {
@@ -570,6 +575,90 @@
       padding: 25px 0;
       margin-top: 50px
     }
+
+    .search-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input {
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .search-input::placeholder {
+      color: #ccc;
+    }
+
+    .search-input:focus {
+      background: rgba(0, 255, 225, 0.2);
+      box-shadow: 0 0 10px #00ffe1;
+      color: #fff;
+    }
+
+    @media (max-width:850px) {
+      .search-container {
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      .search-input {
+        width: 90%;
+        margin: 0 auto;
+      }
+    }
+
+    body.light-mode {
+      background: #f5f5f5;
+      color: #111;
+    }
+
+    body.light-mode nav {
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    body.light-mode nav ul li a {
+      color: #111;
+    }
+
+    body.light-mode .level-one {
+      background: linear-gradient(135deg, #1e3c72, #0b3177)
+    }
+
+    body.light-mode .level-two {
+      background: linear-gradient(135deg, #4f2a98, #e90a4d)
+    }
+
+    body.light-mode .level-three {
+      background: linear-gradient(135deg, #ff4e50, #f9d423)
+    }
+
+    body.light-mode .level-four {
+      background: linear-gradient(135deg, #b21ce0, #000851)
+    }
+
+
+
+
+    body.light-mode footer {
+      color: #000000;
+    }
+
+    body.light-mode .search-input {
+      background: rgba(0, 0, 0, 0.05);
+      color: #111;
+    }
+
+    body.light-mode #ff {
+      color: black;
+    }
   </style>
 </head>
 
@@ -584,6 +673,11 @@
       <div></div>
       <div></div>
     </button>
+    <li class="search-container">
+      <input type="text" id="componentSearch" placeholder="🔍 Search Component..." class="search-input">
+    </li>
+
+
     <ul id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="About Us.html">About</a></li>
@@ -595,8 +689,14 @@
           <li><a href="#" data-lang="en">English</a></li>
           <li><a href="#" data-lang="ar">العربية</a></li>
           <li><a href="#" data-lang="es">Español</a></li>
+
+
+
+
+
         </ul>
       </li>
+      <button id="themeToggle" class="language-btn">🌙 Night Mode</button>
     </ul>
   </nav>
 
@@ -604,66 +704,73 @@
   <p>🚀 Explore new updates with more modules and exciting projects</p>
 
   <div class="levels-container">
- <section class="level level-one">
+    <!-- Level 1: Beginner -->
+    <section class="level level-one">
       <div class="level-header">
         <div class="level-icon">🌐</div>
         <h2 class="level-title">Rank 1: Beginner</h2>
       </div>
       <div class="image-container">
-        <a href="ARDUINO UNO.html" class="component-link"><img src="arduino.jpg" class="component-img">
+        <a id="arduino-uno" class="component-link"><img src="arduino.jpg" class="component-img">
           <div class="component-name">Arduino UNO</div>
         </a>
-        <a href="breadboard.html" class="component-link"><img src="bread-png.jpg" class="component-img">
+        <a id="breadboard" class="component-link"><img src="bread-png.jpg" class="component-img">
           <div class="component-name">Breadboard</div>
         </a>
-        <a href="LED.html" class="component-link"><img src="led-png.jpg" class="component-img">
+        <a id="led" class="component-link"><img src="led-png.jpg" class="component-img">
           <div class="component-name">LED</div>
         </a>
-        <a href="buzzer.html" class="component-link"><img src="buzzer-png.jpg" class="component-img">
+        <a id="buzzer" class="component-link"><img src="buzzer-png.jpg" class="component-img">
           <div class="component-name">Buzzer</div>
         </a>
-        <a href="pushbutton.html" class="component-link"><img src="BUSSH.jpg" class="component-img">
+        <a id="push-button" class="component-link"><img src="BUSSH.jpg" class="component-img">
           <div class="component-name">Push Button</div>
         </a>
-        <a href="RGB led.html" class="component-link"><img src="RGB1.jpg" class="component-img">
+        <a id="rgb-led" class="component-link"><img src="RGB1.jpg" class="component-img">
           <div class="component-name">RGB LED</div>
         </a>
-        <a href="poton1.html" class="component-link"><img src="poton-png.jpg" class="component-img">
+        <a id="potentiometer" class="component-link"><img src="poton-png.jpg" class="component-img">
           <div class="component-name">Potentiometer</div>
         </a>
       </div>
     </section>
+
     <div class="separator"></div>
+
+    <!-- Level 2: Intermediate -->
     <section class="level level-two">
       <div class="level-header">
         <div class="level-icon">🧠</div>
         <h2 class="level-title">Rank 2: Intermediate</h2>
       </div>
       <div class="image-container">
-        <a href="servo.html" class="component-link"><img src="servo1.jpg" class="component-img">
+        <a id="servo-motor" class="component-link"><img src="servo1.jpg" class="component-img">
           <div class="component-name">Servo Motor</div>
         </a>
-        <a href="LCD.html" class="component-link"><img src="LCD.jpg" class="component-img">
+        <a id="lcd-display" class="component-link"><img src="LCD.jpg" class="component-img">
           <div class="component-name">LCD Display</div>
         </a>
-        <a href="ultra1.html" class="component-link"><img src="ultra1.jpg" class="component-img">
+        <a id="ultrasonic" class="component-link"><img src="ultra1.jpg" class="component-img">
           <div class="component-name">Ultrasonic</div>
         </a>
-        <a href="relay1.html" class="component-link"><img src="relay1.jpg" class="component-img">
+        <a id="relay" class="component-link"><img src="relay1.jpg" class="component-img">
           <div class="component-name">Relay</div>
         </a>
-        <a href="bluetooth1.html" class="component-link"><img src="bluetooth1.jpg" class="component-img">
+        <a id="bluetooth" class="component-link"><img src="bluetooth1.jpg" class="component-img">
           <div class="component-name">Bluetooth</div>
         </a>
-        <a href="DC1.html" class="component-link"><img src="dc.jpg" class="component-img">
+        <a id="dc-motor" class="component-link"><img src="dc.jpg" class="component-img">
           <div class="component-name">DC Motor</div>
         </a>
-        <a href="7.html" class="component-link"><img src="7.jpg" class="component-img">
+        <a id="7-segment" class="component-link"><img src="7.jpg" class="component-img">
           <div class="component-name">7 Segment</div>
         </a>
       </div>
     </section>
+
     <div class="separator"></div>
+
+    <!-- Level 3: Advanced -->
     <section class="level level-three">
       <div class="level-header">
         <div class="level-icon">🚀</div>
@@ -673,21 +780,28 @@
         <p><b>coming soon !</b></p>
       </div>
     </section>
+
     <div class="separator"></div>
+
+    <!-- Level 4: Projects -->
     <section class="level level-four">
       <div class="level-header">
         <div class="level-icon">🎓</div>
         <h2 class="level-title">Rank 4: Projects</h2>
       </div>
-      <div class="image-container"><a href="robot1.html" class="component-link"><img src="robot car.jfif"
-            class="component-img">
+      <div class="image-container">
+        <a id="bluetooth-robot-car" class="component-link"><img src="robot car.jfif" class="component-img">
           <div class="component-name">Bluetooth Robot Car</div>
-        </a></div>
+        </a>
+      </div>
     </section>
-    <p id="ff">Hi, I'm Tayem. I build engaging online projects to help you explore and learn Arduino easily.</p>
-    <p id="ff">Fresh updates every week — stay tuned for something new</p>
-    <p id="ff"><span class="update">Update:</span> Added a new section for Components with explanation and examples like
-      Bluetooth Robot Car</p>
+  </div>
+
+  </section>
+  <p id="ff">Hi, I'm Tayem. I build engaging online projects to help you explore and learn Arduino easily.</p>
+  <p id="ff">Fresh updates every week — stay tuned for something new</p>
+  <p id="ff"><span class="update">Update:</span> Added a new section for Components with explanation and examples like
+    Bluetooth Robot Car</p>
   </div>
 
   <button id="backToTop">⬆ Back to Up</button>
@@ -754,60 +868,60 @@
         }
       },
       ar: {
-  title: "مكونات أردوينو | بالعربية",
-  description: "🚀 استكشف التحديثات الجديدة مع المزيد من الموديولات والمشاريع المثيرة",
-  levels: {
-    1: "المرحلة 1: مبتدئ",
-    2: "المرحلة 2: متوسط",
-    3: "المرحلة 3: متقدم",
-    4: "المرحلة 4: مشاريع"
-  },
-  components: {
-    "Arduino UNO": "أردوينو أونو",
-    "Breadboard": "لوحة تجارب",
-    "LED": "مصباح LED",
-    "Buzzer": "جهاز التنبيه",
-    "Push Button": "زر ضغط",
-    "RGB LED": "LED متعدد الألوان",
-    "Potentiometer": "مقاومة متغيرة",
-    "Servo Motor": "محرك سيرفو",
-    "LCD Display": "شاشة LCD",
-    "Ultrasonic": "حساس مسافة",
-    "Relay": "ريليه",
-    "Bluetooth": "بلوتوث",
-    "DC Motor": "محرك تيار مستمر",
-    "7 Segment": "سبعة مقاطع",
-    "Bluetooth Robot Car": "سيارة روبوت بلوتوث"
-  }
-}
-,
-     es: {
-  title: "Componentes de Arduino | En Español",
-  description: "🚀 Explora nuevas actualizaciones con más módulos y proyectos emocionantes",
-  levels: {
-    1: "Nivel 1: Principiante",
-    2: "Nivel 2: Intermedio",
-    3: "Nivel 3: Avanzado",
-    4: "Nivel 4: Proyectos"
-  },
-  components: {
-    "Arduino UNO": "Arduino UNO",
-    "Breadboard": "Protoboard",
-    "LED": "LED",
-    "Buzzer": "Zumbador",
-    "Push Button": "Botón",
-    "RGB LED": "LED RGB",
-    "Potentiometer": "Potenciómetro",
-    "Servo Motor": "Motor Servo",
-    "LCD Display": "Pantalla LCD",
-    "Ultrasonic": "Sensor Ultrasónico",
-    "Relay": "Relé",
-    "Bluetooth": "Bluetooth",
-    "DC Motor": "Motor DC",
-    "7 Segment": "Display de 7 Segmentos",
-    "Bluetooth Robot Car": "Coche Robot Bluetooth"
-  }
-}
+        title: "مكونات أردوينو | بالعربية",
+        description: "🚀 استكشف التحديثات الجديدة مع المزيد من الموديولات والمشاريع المثيرة",
+        levels: {
+          1: "المرحلة 1: مبتدئ",
+          2: "المرحلة 2: متوسط",
+          3: "المرحلة 3: متقدم",
+          4: "المرحلة 4: مشاريع"
+        },
+        components: {
+          "Arduino UNO": "أردوينو أونو",
+          "Breadboard": "لوحة تجارب",
+          "LED": "مصباح LED",
+          "Buzzer": "جهاز التنبيه",
+          "Push Button": "زر ضغط",
+          "RGB LED": "LED متعدد الألوان",
+          "Potentiometer": "مقاومة متغيرة",
+          "Servo Motor": "محرك سيرفو",
+          "LCD Display": "شاشة LCD",
+          "Ultrasonic": "حساس مسافة",
+          "Relay": "ريليه",
+          "Bluetooth": "بلوتوث",
+          "DC Motor": "محرك تيار مستمر",
+          "7 Segment": "سبعة مقاطع",
+          "Bluetooth Robot Car": "سيارة روبوت بلوتوث"
+        }
+      }
+      ,
+      es: {
+        title: "Componentes de Arduino | En Español",
+        description: "🚀 Explora nuevas actualizaciones con más módulos y proyectos emocionantes",
+        levels: {
+          1: "Nivel 1: Principiante",
+          2: "Nivel 2: Intermedio",
+          3: "Nivel 3: Avanzado",
+          4: "Nivel 4: Proyectos"
+        },
+        components: {
+          "Arduino UNO": "Arduino UNO",
+          "Breadboard": "Protoboard",
+          "LED": "LED",
+          "Buzzer": "Zumbador",
+          "Push Button": "Botón",
+          "RGB LED": "LED RGB",
+          "Potentiometer": "Potenciómetro",
+          "Servo Motor": "Motor Servo",
+          "LCD Display": "Pantalla LCD",
+          "Ultrasonic": "Sensor Ultrasónico",
+          "Relay": "Relé",
+          "Bluetooth": "Bluetooth",
+          "DC Motor": "Motor DC",
+          "7 Segment": "Display de 7 Segmentos",
+          "Bluetooth Robot Car": "Coche Robot Bluetooth"
+        }
+      }
 
     };
 
@@ -824,6 +938,71 @@
         });
       });
     });
+    const searchInput = document.getElementById('componentSearch');
+
+    const componentIds = {
+      "arduino uno": "arduino-uno",
+      "breadboard": "breadboard",
+      "led": "led",
+      "buzzer": "buzzer",
+      "push button": "push-button",
+      "rgb led": "rgb-led",
+      "potentiometer": "potentiometer",
+      "servo motor": "servo-motor",
+      "lcd display": "lcd-display",
+      "ultrasonic": "ultrasonic",
+      "relay": "relay",
+      "bluetooth": "bluetooth",
+      "dc motor": "dc-motor",
+      "7 segment": "7-segment",
+      "bluetooth robot car": "bluetooth-robot-car"
+    };
+
+    // البحث عن طريق إدخال المستخدم
+    searchInput.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        const query = searchInput.value.trim().toLowerCase();
+
+        // نبحث في keys الإنجليزي فقط
+        let targetId = componentIds[query];
+
+        if (targetId) {
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // نضيء الكومبوننت شويه عند البحث
+            targetEl.style.transition = "box-shadow 0.5s ease";
+            targetEl.style.boxShadow = "0 0 30px #00ffe1, 0 0 50px #ff00ff";
+            setTimeout(() => {
+              targetEl.style.boxShadow = "";
+            }, 1500);
+          }
+        } else {
+          alert('Component not found! (Use English name)');
+        }
+      }
+    });
+    const themeToggle = document.getElementById('themeToggle');
+
+    // Load theme from localStorage
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-mode');
+      themeToggle.textContent = '🌙 Night Mode';
+    } else {
+      themeToggle.textContent = '☀️ Day Mode';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      if (document.body.classList.contains('light-mode')) {
+        themeToggle.textContent = '🌙 Night Mode';
+        localStorage.setItem('theme', 'light');
+      } else {
+        themeToggle.textContent = '☀️ Day Mode';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
   </script>
 </body>
 
