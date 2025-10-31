@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AGIAL SCHOOL | Arduino Levels</title>
   <link rel="icon" href="agail.jpg">
+  
   <style>
     * {
       box-sizing: border-box;
@@ -659,6 +660,65 @@
     body.light-mode #ff {
       color: black;
     }
+      /* Full screen overlay */
+  #loadingScreen {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  #loadingScreen.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* Typing code animation */
+  .typing-code {
+    color: #00ff88;
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    line-height: 1.5;
+    overflow: hidden;
+    border-right: 2px solid #00ff88;
+    white-space: nowrap;
+    animation: typing 4s steps(40) 1s forwards;
+  }
+
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  /* Moving wires effect */
+  .wires::before, .wires::after {
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00ff88, transparent);
+    top: 50%;
+    left: -10%;
+    animation: moveWire 2s linear infinite;
+  }
+
+  .wires::after {
+    top: 60%;
+    animation-delay: 1s;
+  }
+
+  @keyframes moveWire {
+    0% { transform: translateX(-100%); opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { transform: translateX(100%); opacity: 0.3; }
+  }
   </style>
 </head>
 
@@ -711,25 +771,25 @@
         <h2 class="level-title">Rank 1: Beginner</h2>
       </div>
       <div class="image-container">
-        <a id="arduino-uno" class="component-link"><img src="arduino.jpg" class="component-img">
+        <a href="ARDUINO UNO.html" id="arduino-uno" class="component-link"><img src="arduino.jpg" class="component-img">
           <div class="component-name">Arduino UNO</div>
         </a>
-        <a id="breadboard" class="component-link"><img src="bread-png.jpg" class="component-img">
+        <a href="breadboard.html" id="breadboard" class="component-link"><img src="bread-png.jpg" class="component-img">
           <div class="component-name">Breadboard</div>
         </a>
-        <a id="led" class="component-link"><img src="led-png.jpg" class="component-img">
+        <a href="LED.html" id="led" class="component-link"><img src="led-png.jpg" class="component-img">
           <div class="component-name">LED</div>
         </a>
-        <a id="buzzer" class="component-link"><img src="buzzer-png.jpg" class="component-img">
+        <a href="buzzer.html" id="buzzer" class="component-link"><img src="buzzer-png.jpg" class="component-img">
           <div class="component-name">Buzzer</div>
         </a>
-        <a id="push-button" class="component-link"><img src="BUSSH.jpg" class="component-img">
+        <a href="pushbutton.html" id="push-button" class="component-link"><img src="BUSSH.jpg" class="component-img">
           <div class="component-name">Push Button</div>
         </a>
-        <a id="rgb-led" class="component-link"><img src="RGB1.jpg" class="component-img">
+        <a href="RGB led.html" id="rgb-led" class="component-link"><img src="RGB1.jpg" class="component-img">
           <div class="component-name">RGB LED</div>
         </a>
-        <a id="potentiometer" class="component-link"><img src="poton-png.jpg" class="component-img">
+        <a href="poton1.html" id="potentiometer" class="component-link"><img src="poton-png.jpg" class="component-img">
           <div class="component-name">Potentiometer</div>
         </a>
       </div>
@@ -744,25 +804,25 @@
         <h2 class="level-title">Rank 2: Intermediate</h2>
       </div>
       <div class="image-container">
-        <a id="servo-motor" class="component-link"><img src="servo1.jpg" class="component-img">
+        <a href="servo.html" id="servo-motor" class="component-link"><img src="servo1.jpg" class="component-img">
           <div class="component-name">Servo Motor</div>
         </a>
-        <a id="lcd-display" class="component-link"><img src="LCD.jpg" class="component-img">
+        <a href="LCD.html" id="lcd-display" class="component-link"><img src="LCD.jpg" class="component-img">
           <div class="component-name">LCD Display</div>
         </a>
-        <a id="ultrasonic" class="component-link"><img src="ultra1.jpg" class="component-img">
+        <a href="ultra1.html" id="ultrasonic" class="component-link"><img src="ultra1.jpg" class="component-img">
           <div class="component-name">Ultrasonic</div>
         </a>
-        <a id="relay" class="component-link"><img src="relay1.jpg" class="component-img">
+        <a href="relay1.html" id="relay" class="component-link"><img src="relay1.jpg" class="component-img">
           <div class="component-name">Relay</div>
         </a>
-        <a id="bluetooth" class="component-link"><img src="bluetooth1.jpg" class="component-img">
+        <a href="bluetooth1.html" id="bluetooth" class="component-link"><img src="bluetooth1.jpg" class="component-img">
           <div class="component-name">Bluetooth</div>
         </a>
-        <a id="dc-motor" class="component-link"><img src="dc.jpg" class="component-img">
+        <a href="DC1.html" id="dc-motor" class="component-link"><img src="dc.jpg" class="component-img">
           <div class="component-name">DC Motor</div>
         </a>
-        <a id="7-segment" class="component-link"><img src="7.jpg" class="component-img">
+        <a href="seven2.html" id="7-segment" class="component-link"><img src="7.jpg" class="component-img">
           <div class="component-name">7 Segment</div>
         </a>
       </div>
@@ -790,7 +850,7 @@
         <h2 class="level-title">Rank 4: Projects</h2>
       </div>
       <div class="image-container">
-        <a id="bluetooth-robot-car" class="component-link"><img src="robot car.jfif" class="component-img">
+        <a href="robot1.html" id="bluetooth-robot-car" class="component-link"><img src="robot car.jfif" class="component-img">
           <div class="component-name">Bluetooth Robot Car</div>
         </a>
       </div>
@@ -1004,6 +1064,125 @@
     });
 
   </script>
+  <!-- 🤖 المساعد الذكي -->
+<div id="assistant">
+  <div class="bot-face">🤖</div>
+  <div class="speech-bubble" id="botMessage">مرحباً!</div>
+</div>
+
+<script>
+  const botMessages = [
+    "👋 أهلاً بيك! عامل إيه النهارده؟",
+    "⚡ مشروعك شكله هيطلع أسطوري!",
+    "💡 جرّبت تستخدم Sensor جديد؟",
+    "🔥 لو الدنيا وقفت، افتكر إنك تقدر تبدأ من جديد.",
+    "🧠 المبرمج الشاطر هو اللي بيجرّب قبل ما يسأل 😉",
+    "🎯 افتكر: كل Error له حل، بس لازم صبر.",
+    "😎 الموقع ده بينوّر بوجودك!",
+    "🤖 أنا متابعك... وشغلك بيكبر كل ثانية!",
+    "🚀 كل سطر كود بتكتبه بيقرّبك من هدفك.",
+    "💬 هل تعلم؟ الأردوينو يقدر يشغّل 50 LED مع شوية تنظيم.",
+    "🕹️ جرّب تعمل مشروع روبوت صغير وخليني أشوفه 😍",
+    "🎵 الكود من غير ترتيب، زيه زي لحن من غير موسيقى.",
+    "🌟 استمر! كل كود بتكتبه هو لبنة في طريق الإبداع.",
+    "😂 لو الكود مش شغال، جرب تعمل 'Save' الأول!",
+    "🧩 البرمجة شبه لعبة بازل، ركّب القطع صح وهتنبهر.",
+    "⚙️ استخدم التعليقات في الكود، هتشكر نفسك بعدين!",
+    "🕒 خُد بريك صغير... الدماغ كمان بتحتاج راحة.",
+    "💻 لما الكود يشتغل من أول مرة... لازم تحتفل 🎉",
+    "🎨 خلي مشروعك شكله حلو زي فكرته، العين بتحب الجمال 😁",
+    "📱 فكر تعمل نسخة موبايل من موقعك؟ فكرة جامدة 💪",
+    "🧃 خد نفس وكمّل، الإبداع لسه في الطريق.",
+    "🌙 الوضع الليلي مش رفاهية... ده حماية لعينيك 😌",
+    "🔌 أتحداك لو نسيت توصل الأرضي 😂",
+    "💭 هل فكرت تخليني أتكلم بصوت؟ 🤔",
+    "🧑‍💻 كود النهارده، هو فخر بكرة.",
+    "🎮 المبرمجين بيعيشوا مغامرات داخل الأكواد!",
+    "📚 معلومة: كلمة Arduino معناها “صديق قوي” بالإيطالي ❤️",
+    "💥 Error؟ حلو! معناها إنك ماشي في السكة الصح.",
+    "🧩 السر في التنظيم مش السرعة.",
+    "😴 شكلك مركز قوي… خُدلك دقيقة فاصل ☕",
+    "🌀 الكود من غير ترتيب = صداع أكواد 😂",
+    "🔍 راجع الأقواس يا بطل، دايمًا هما السبب 😅",
+    "📡 Bluetooth دايمًا بيحب الهدوء… جرب تبطّل Spam 😂",
+    "🚨 لو شميت ريحة دخان… يمكن الـ LED اتحمس زيادة 😆",
+    "🎓 كل خطأ بيعلّمك حاجة جديدة.",
+    "💬 ما توقفش عند أول فشل، ده مجرد سطر ناقص.",
+    "🧠 المبدع الحقيقي بيشوف الكود كفن مش كأرقام.",
+    "🎯 كل تجربة = XP جديدة ليك 💪",
+    "🛠️ استخدم Serial Monitor كأنه عيونك في المشروع 👀",
+    "🌞 صباح النشاط يا نجم الكود!",
+    "🌙 سهرت؟ ماشي، بس احفظ قبل ما تنام 😂",
+    "💫 تخيّل موقعك بعد سنة! هيبقى حاجة عالمية.",
+    "🔧 لو الدنيا لخبطت، جرب Restart، دايمًا بيفك العقد 😅",
+    "👾 الكود اللي مش بيشتغل؟ بيجهّزلك مفاجأة 😉",
+    "🎉 شغلك بيتحسّن كل ثانية، كمل يا بطل!"
+  ];
+
+  const bot = document.getElementById("assistant");
+  const bubble = document.getElementById("botMessage");
+
+  // 🧠 دالة لتغيير الرسالة
+  function showRandomMessage() {
+    const randomText = botMessages[Math.floor(Math.random() * botMessages.length)];
+    bubble.textContent = randomText;
+    bot.classList.add("show");
+    setTimeout(() => bot.classList.remove("show"), 4500);
+  }
+
+  // ⏱️ كل 5 - 7 ثواني بالضبط
+  function startBot() {
+    showRandomMessage();
+    setInterval(showRandomMessage, Math.random() * 2000 + 5000);
+  }
+
+  // 🔥 تشغيل المساعد
+  startBot();
+</script>
+
+<style>
+  /* 🤖 المساعد */
+  #assistant {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    z-index: 9999;
+  }
+
+  #assistant.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .bot-face {
+    font-size: 2rem;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .speech-bubble {
+    background: #fff;
+    color: #000;
+    padding: 10px 15px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    max-width: 250px;
+    font-family: "Cairo", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.3rem;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+</style>
+
 </body>
 
 </html>
